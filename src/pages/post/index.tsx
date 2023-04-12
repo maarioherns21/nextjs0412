@@ -1,11 +1,21 @@
+import { FC } from "react"
 
 
 
 
-const Posts = () => {
+
+interface Props {
+    post: any
+}
+
+const Posts:FC<Props> = ({
+    post
+}) => {
      
     return (
-        <>Posts</>
+        <>
+     post
+       </>
     )
 }
 
