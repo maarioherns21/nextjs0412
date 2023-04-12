@@ -35,7 +35,6 @@ return (
         </Link>
       </ul>
     </div>
-  
   </div>
 </nav>
     )
