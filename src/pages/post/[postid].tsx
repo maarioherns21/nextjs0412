@@ -47,6 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       props: {
         post: data || null,
       },
+    //   revalidate: 3   : <--- only use this to statically add into the  build  each  page  like maybe home page  , but not for  post or  profile 
     };
   };
   
