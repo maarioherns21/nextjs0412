@@ -46,37 +46,3 @@ const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
 
 export default ProfilePage;
 
-
-
-
-
-
-
-
-// ///this generates properties form the Server  like  the user , allows to fetch and dinamically  see the rendering
-// export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
-//   query,
-// }) => {
-//   const res = await fetch(
-//     `https://jsonplaceholder.typicode.com/users/${query.id}`
-//   );
-//   const data = await res.json();
-
-//   return {
-//     props: {
-//       user: data || null,
-//     },
-//   };
-// };
-
-// /// the profile page is consuming the data  tha is coming fomr the  props on the  function above
-// const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
-//   return (
-//     user && (
-//       <>
-//         <h2>{user.name}</h2>
-//         <h3>{user.email}</h3>
-//       </>
-//     )
-//   );
-// };
