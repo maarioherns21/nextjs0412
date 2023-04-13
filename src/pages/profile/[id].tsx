@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next";
-import { FC } from "react"
-
+import { FC } from "react";
 
 interface User {
   id: number;
@@ -14,11 +13,13 @@ interface ProfilePageProps {
   user: User | null;
 }
 
-
-///this generates properties form the Server 
-export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({ query }) => {
-  
-  const res = await fetch(`https://jsonplaceholder.typicode.com/users/${query.id}`);
+// https://jsonplaceholder.typicode.com/users/
+export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
+  query,
+}) => {
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/users/${query.id}`
+  );
   const data = await res.json();
 
   return {
@@ -29,18 +30,53 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
 };
 
 const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
-  
   if (!Object.keys(user!).length) {
-    return <h1>User not found!</h1>;
+    return <h1>No Results!</h1>;
   }
 
-  return user && (
-    <>
-      <h1>{user.name}</h1>
-      <h3>{user.email}</h3>
-    </>
+  return (
+    user && (
+      <>
+        <h2>{user.name}</h2>
+        <h3>{user.email}</h3>
+      </>
+    )
   );
 };
 
+export default ProfilePage;
 
-export default  ProfilePage
+
+
+
+
+
+
+
+// ///this generates properties form the Server  like  the user , allows to fetch and dinamically  see the rendering
+// export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
+//   query,
+// }) => {
+//   const res = await fetch(
+//     `https://jsonplaceholder.typicode.com/users/${query.id}`
+//   );
+//   const data = await res.json();
+
+//   return {
+//     props: {
+//       user: data || null,
+//     },
+//   };
+// };
+
+// /// the profile page is consuming the data  tha is coming fomr the  props on the  function above
+// const ProfilePage: FC<ProfilePageProps> = ({ user }) => {
+//   return (
+//     user && (
+//       <>
+//         <h2>{user.name}</h2>
+//         <h3>{user.email}</h3>
+//       </>
+//     )
+//   );
+// };

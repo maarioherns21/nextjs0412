@@ -3,8 +3,21 @@ import { FC } from "react"
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+interface PostProps {
+  post: Post | null;
+}
+
 ///if the fallback is set to true and add a loading router.isFallback the page will fetch the service side json
 ///if is off it will only fetch what is on the params
+
+
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
@@ -19,16 +32,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     };
   };
   
-  interface Post {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
-  }
-  
-  interface PostProps {
-    post: Post | null;
-  }
+
   
   export const getStaticProps: GetStaticProps<PostProps> = async ({ params }) => {
     //this check is  postid is undefined or not 
