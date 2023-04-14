@@ -27,8 +27,12 @@ To get started with the application, you need to have Node.js and MongoDB instal
 
 
 ```bash
-MONGODB_URI=<your MongoDB connection string>
-MONGODB_DB=<your MongoDB database name>
+CLIENT_MONGO_URL=your MongoDB connection string>
+CLIENT_ID_JWT_SECRET=<your JWT secret name>
+CLIENT_ID=<your google client id>
+CLIENT_SECRET=<your google secret>
+CLIENT_ID_GIT=<your git client id>
+CLIENT_SECRET_GIT=<your git secret>
 ```
 
 4. Run npm run dev to start the development server.
