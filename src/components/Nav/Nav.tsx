@@ -13,11 +13,11 @@ const Nav = () => {
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         {userData ? (
-          <a href="/profile" className="flex items-center" id="navbar-default">
+          <Link href={`/user/${userData?.id}`} className="flex items-center" id="navbar-default">
             <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
               {userData?.name}
             </span>
-          </a>
+          </Link>
         ) : (
           <a href="/profile" className="flex items-center" id="navbar-default">
             <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
@@ -70,13 +70,13 @@ const Nav = () => {
             >
               Home
             </Link>
-            <Link
-              href="/user"
+           {userData && <Link
+              href={`/user/${userData?.id}`}
               className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
               aria-current="page"
             >
               User
-            </Link>
+            </Link>}
             <Link
               href="/post"
               className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
@@ -91,7 +91,7 @@ const Nav = () => {
                 Login
               </Link>
             ) : (
-              <button onClick={() => signOut()}>Log out</button>
+              <button onClick={() => signOut({ callbackUrl: '/' })}>Log out</button>
             )}
           </ul>
         </div>

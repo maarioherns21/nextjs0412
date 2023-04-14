@@ -23,7 +23,7 @@ const LoginPage: FC = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const data = { ...userData };
+      // const data = { ...userData };
       setIsPending(true);
       const res = await signIn("credentials", {
         ...userData,
@@ -32,7 +32,7 @@ const LoginPage: FC = () => {
       });
       console.log(res);
       //    console.log(session)
-      if (res?.ok) router.push(res.url!);
+      // if (res?.ok) router.push(res.url!);
       setError(null);
       setIsPending(false);
     } catch (error: any) {
