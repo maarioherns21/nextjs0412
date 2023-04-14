@@ -23,17 +23,11 @@ const handleSubmit = async (e: FormEvent) => {
     const data = { ...userData };
     setIsPending(true);
     const res = await signIn("credentials", {
-      ...data,
+      ...userData,
       redirect: true,
       callbackUrl: "/"
     });
     console.log(res)
-
-    //here is all the info  that i need for my website
-   const session : any  = await getSession()
-   
-   console.log(session)
-
 //    console.log(session)
     if(res?.ok)  router.push(res.url!)
     setError(null);

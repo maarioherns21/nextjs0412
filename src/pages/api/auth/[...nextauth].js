@@ -32,7 +32,7 @@ export const authOptions = {
         if (!checkPassword || user.email !== email) {
           throw new Error("Username or Password doesn't match");
         }
-
+         console.log(user)
         return user;
       },
     }),
