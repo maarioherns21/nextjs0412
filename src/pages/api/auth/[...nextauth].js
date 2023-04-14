@@ -1,5 +1,7 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 import User from "../../../../models/user"
 import connectMongo from "../../../../lib/db-connect"
 import bcrypt from "bcrypt"
@@ -8,6 +10,14 @@ export const authOptions = {
   // Configure one or more authentication providers
 
   providers: [
+    GoogleProvider({
+      clientId: process.env.CLIENT_ID,
+      clientSecret: process.env.CLIENT_SECRET,
+    }),
+    GithubProvider({
+      clientId: process.env.CLIENT_ID_GIT,
+      clientSecret: process.env.CLIENT_SECRET_GIT,
+    }),
     CredentialsProvider({
       name: "Credentials",
 
