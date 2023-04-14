@@ -4,13 +4,8 @@ import { FC } from "react"
 
 
 
-interface Props {
-    post: any
-}
 
-const Posts:FC<Props> = ({
-    post
-}) => {
+const Posts:FC = () => {
      
     return (
         <>

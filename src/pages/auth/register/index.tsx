@@ -1,7 +1,8 @@
 import useFetch from "@/components/useFetch/useFetch";
+import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEvent, useEffect, useState } from "react";
 
 interface ProfileProps {
   name: string;
@@ -17,6 +18,7 @@ const RegisterPage: FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
   const router = useRouter()
   const { userData : user} =useFetch()
+  const validation = true
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,12 +41,16 @@ const RegisterPage: FC = () => {
       setIsPending(false);
     }
   };
-  ///this will reroute the page if the condition is met
-  if (user) {
+  
+ 
+ 
+  // /this will reroute the page if the condition is met
+  if (user && validation) {
     router.replace("/");
-    return null;
+    return null 
   } 
 
+  
   return (
     <>
     <section className="bg-gray-50 dark:bg-gray-900">

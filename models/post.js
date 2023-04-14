@@ -9,6 +9,16 @@ const PostSchema = new Schema(
     body: {
       type: String,
     },
+    image: {
+      type: String,
+    },
+    slug: {
+      type: String,
+    },
+    user: {
+      type: String
+     
+    },
   },
   {
     timestamps: true,
