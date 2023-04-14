@@ -5,19 +5,26 @@ import { signOut } from "next-auth/react";
 
 const Nav = () => {
   const [tuggle, setTuggle] = useState(true);
-
   const { userData } = useFetch();
 
-  const handleLogout = () => {};
+
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/profile" className="flex items-center" id="navbar-default">
-          <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
-            Mario Hernandez
-          </span>
-        </a>
+        {userData ? (
+          <a href="/profile" className="flex items-center" id="navbar-default">
+            <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
+              {userData?.name}
+            </span>
+          </a>
+        ) : (
+          <a href="/profile" className="flex items-center" id="navbar-default">
+            <span className="self-center text-md font-semibold whitespace-nowrap dark:text-white">
+              Guest
+            </span>
+          </a>
+        )}
         <a href="/" className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
@@ -84,7 +91,7 @@ const Nav = () => {
                 Login
               </Link>
             ) : (
-              <button>Log out</button>
+              <button onClick={() => signOut()}>Log out</button>
             )}
           </ul>
         </div>

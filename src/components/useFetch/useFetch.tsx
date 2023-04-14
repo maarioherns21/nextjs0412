@@ -2,14 +2,6 @@ import { getSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 
-interface SessionData {
-  user: {
-    name: string;
-    email: string;
-    // Add other properties here
-  };
-  // Add other properties here
-}
 
 interface UseFetchReturnType {
   userData: any
@@ -21,7 +13,7 @@ const useFetch = (): UseFetchReturnType => {
   const handleSubmit = async () => {
    try {
     const data: any = await getSession();
-    setUserData(data?.session);
+    setUserData(data?.session.user);
    } catch (error: any ) {
      console.log(error.message)
    }
