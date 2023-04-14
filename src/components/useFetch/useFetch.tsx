@@ -8,7 +8,7 @@ interface UseFetchReturnType {
 }
 
 const useFetch = (): UseFetchReturnType => {
-  const [userData, setUserData] = useState<any>([]);
+  const [userData, setUserData] = useState<any>(null);
    
   const handleSubmit = async () => {
    try {

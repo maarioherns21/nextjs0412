@@ -1,3 +1,4 @@
+import useFetch from "@/components/useFetch/useFetch";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, FormEvent, useState } from "react";
@@ -15,6 +16,7 @@ const RegisterPage: FC = () => {
   const [error, setError] = useState<null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const router = useRouter()
+  const { userData : user} =useFetch()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -37,6 +39,11 @@ const RegisterPage: FC = () => {
       setIsPending(false);
     }
   };
+  ///this will reroute the page if the condition is met
+  if (user) {
+    router.replace("/");
+    return null;
+  } 
 
   return (
     <>

@@ -4,6 +4,7 @@ import { getSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "../../../styles/Home.module.css";
+import useFetch from "@/components/useFetch/useFetch";
 
 interface UserData {
   email: string;
@@ -17,6 +18,7 @@ const LoginPage: FC = () => {
   const [error, setError] = useState<null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const router = useRouter();
+  const { userData: userd } = useFetch()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -48,6 +50,12 @@ const LoginPage: FC = () => {
   const handleGithubSignin: () => void = async () => {
     signIn("github", { callbackUrl: "http://localhost:3000" });
   };
+
+  ///this will reroute the page if the condition is met
+  if (userd) {
+    router.replace("/");
+    return null;
+  } 
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
