@@ -49,6 +49,30 @@ export const authOptions = {
     // ...add more providers here
   ],
   callbacks: {
+    // async signIn({ user, account, profile, email, credentials }) {
+
+    //   // await connectToDatabase();
+
+    //   // // Check if the user already exists in the database
+    //   // const existingUser = await User.findOne({ email: user.email });
+      
+    //   // if (existingUser) {
+    //   //   // Update the user's information if necessary
+    //   //   return true;
+    //   // }
+
+    //   // // Create a new user in the database
+    //   // const newUser = new User({
+    //   //   name: user.name,
+    //   //   email: user.email,
+    //   //   image: user.image,
+    //   //   user : user.id,
+    //   // });
+
+    //   // await newUser.save();
+
+    //   return true
+    // },
     async session({ session, token }) {
       // Send properties to the client, like an access_token and user id from a provider.
       session.user.id = token.sub;
@@ -56,7 +80,6 @@ export const authOptions = {
       return {session};
     },
   },
-
 };
 
 

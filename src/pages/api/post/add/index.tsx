@@ -5,6 +5,13 @@ import News from "../../../../../models/post"
 import multer from "multer"
 import path from 'path'
 import nc from "next-connect";
+import slugify from 'slugify'
+import mongoose from 'mongoose';
+
+
+
+
+
 const staticURL = "http://localhost:3000/uploads/"
 
 export const config = {
@@ -47,13 +54,15 @@ handler.post( async (req: NextApiRequest & { file: any }, res: NextApiResponse) 
       await connectMongo();
       const post = req.body;
       const { file } = req;
-
+       //this add the name of the image at the end of the post id
+      const slug = slugify(req.body.title, { remove: /[*+~.()'"!:@]/g });
+      // console.log("slug :" , slug)
       // console.log({ file, ...post.user });
 
       /// i had to do the filename because that was the only way to save the file to the data base
-      const newPost = new News({ ...post, image: file.filename });
+      const newPost = new News({ ...post, image: file.filename, slug: slug.toLocaleLowerCase() });
 
-      console.log(newPost);
+      // console.log(newPost);
 
       const savePost = await newPost.save();
 

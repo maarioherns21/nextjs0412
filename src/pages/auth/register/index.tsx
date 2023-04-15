@@ -1,5 +1,6 @@
 import useFetch from "@/components/useFetch/useFetch";
 import { GetServerSideProps } from "next";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FC, FormEvent, useEffect, useState } from "react";
@@ -7,7 +8,7 @@ import { FC, FormEvent, useEffect, useState } from "react";
 interface ProfileProps {
   name: string;
   email: string;
-  password: string;
+  password?: string;
 }
 
 const userData = { name: "", email: "", password: "" };
@@ -19,6 +20,26 @@ const RegisterPage: FC = () => {
   const router = useRouter()
   const { userData : user} =useFetch()
   const validation = true
+  
+  // const [data1, setdata1]= useState([])
+  
+
+  // const handleGoogleSignin = async () => {
+  //   const provider = 'google';
+  //   const callbackUrl = 'http://localhost:3000';
+  //   const response: any = await signIn(provider, { callbackUrl });
+  //   const res = await fetch("http://localhost:3000/api/user/register", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(user),
+  //   });
+  //   console.log(response)
+
+  //    setdata1(response);
+  // };
+
+  // console.log(data)
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -142,6 +163,7 @@ const RegisterPage: FC = () => {
               >
                 Submit
               </button>
+              <button >Google Sign up </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Have an account?{" "}
                 <Link

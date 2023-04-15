@@ -8,7 +8,8 @@ const Users = () => {
     const router = useRouter();
     const { userData } = useFetch();
     const userId = router.query.userId;
-  
+    
+    console.log(userData)
 
   /// i added  rerouting to log out
     if (userData) {

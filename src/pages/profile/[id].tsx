@@ -21,7 +21,7 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async ({
     `https://jsonplaceholder.typicode.com/users/${query.id}`
   );
   const data = await res.json();
-
+  console.log(data)
   return {
     props: {
       user: data || null,

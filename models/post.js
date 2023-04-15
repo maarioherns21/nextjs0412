@@ -12,9 +12,12 @@ const PostSchema = new Schema(
     image: {
       type: String,
     },
+    slug: {
+      type: String,
+    },
     user: {
-      type: String
-     
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {

@@ -1,5 +1,6 @@
 import useFetch from "@/components/useFetch/useFetch";
 import axios from "axios";
+import mongoose , {ObjectId} from "mongoose";
 import { getSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -18,15 +19,20 @@ const PostsForm: () => void = () => {
   const [error, setError] = useState<null>(null);
   const [isPending, setIsPending] = useState<boolean>(false);
   const { userData } = useFetch();
-
+  const router = useRouter()
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       //this session allowed me to add userID to the file from the client
       const { session }: any = await getSession();
-      const userId = session?.user?.id;
-      const article = { ...formData, image: file, user: userId };
+      // const user = parseInt(session?.user?.id)  <--- another way to  relate Schemas from the front end "many to may relationship"
+      // const user = parseInt(session?.user?.id)
+      const user = session?.user?.id
+      console.log(user)
+      // const user = JSON.parse(session?.user?.id)
+      const newId = mongoose.Types.ObjectId.createFromHexString(user);
+      const article = { ...formData, image: file, user: newId };
       setIsPending(true);
       const config = { headers: { "Content-Type": "multipart/form-data" } };
       const res = await axios.post(
@@ -35,6 +41,7 @@ const PostsForm: () => void = () => {
         config
       );
       console.log(res);
+      router.push("/")
       setError(null);
       setIsPending(false);
     } catch (error: any) {
