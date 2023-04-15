@@ -5,9 +5,6 @@ import News from "../../../../../models/post"
 import multer from "multer"
 import path from 'path'
 import nc from "next-connect";
-import { getSession } from 'next-auth/react'
-import useFetch from '@/components/useFetch/useFetch'
-import slugify from 'slugify'
 const staticURL = "http://localhost:3000/uploads/"
 
 export const config = {
@@ -16,6 +13,7 @@ export const config = {
   },
 };
 
+////----- multer for next.js -----//
 
 export const upload = multer({
   storage: multer.diskStorage({
@@ -27,6 +25,8 @@ export const upload = multer({
     },
   }),
 });
+
+////----- multer for next.js -----//
 
 
 //next-connect--------------
@@ -43,30 +43,28 @@ const handler = nc<NextApiRequest, NextApiResponse>({
 
 ///this is the handler you can use when adding for example multer
 handler.post( async (req: NextApiRequest & { file: any }, res: NextApiResponse) => {
-  try {
-    const post = req.body;
-    const { file } = req;
-    
-    // console.log({ file, ...post.user });
+    try {
+      await connectMongo();
+      const post = req.body;
+      const { file } = req;
 
-    await connectMongo();
+      // console.log({ file, ...post.user });
 
-  /// i had to do the filename because that was the only way to save the file to the data base
-    const newPost = new News({ ...post, image: file.filename  });
-     
-    console.log(newPost)
-    
-    const savePost = await newPost.save()
-     
-    res.status(201).json( {data: savePost});
-    
-  } catch (error: any) {
-    console.log(error)
+      /// i had to do the filename because that was the only way to save the file to the data base
+      const newPost = new News({ ...post, image: file.filename });
 
-    res.status(404).json({ message: error.message });
+      console.log(newPost);
+
+      const savePost = await newPost.save();
+
+      res.status(201).json({ data: savePost });
+    } catch (error: any) {
+      console.log(error);
+
+      res.status(404).json({ message: error.message });
+    }
   }
- 
-});
+);
 
 export default handler;
 
